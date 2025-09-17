@@ -2,7 +2,7 @@ import csv
 
 rutacsv = "paises.csv"  
 
-def cargar_paises (rutacsv):
+def cargar_paises (rutacsv): #funcion para cargar los paises desde el csv.
     paises = []
     with open(rutacsv, newline="", encoding="utf-8") as archivo:
         lector = csv.DictReader(archivo)
@@ -16,7 +16,7 @@ def cargar_paises (rutacsv):
             paises.append(pais)
         return paises
     
-def mostrar_menu():
+def mostrar_menu(): #funcion para mostrar las opciones disponible al usario.
     print(" ===== Menu principal ===== ")
     print("1. Listar todos los paises.")
     print("2. Buscar pais por nombre")
@@ -25,7 +25,9 @@ def mostrar_menu():
     print("5. Mostrar estadisticas")
     print("6. Salir.")
 
-def listar_paises(paises):
+def listar_paises(paises): 
+    # funcion para recorrer una lista con todos los paises del csv y los muestra en un formato legible.
+    # se utiliza la "," como separador de miles en poblacion y superficie.
     print("\n=== Listado de Países ===\n")
     for pais in paises:
         print(f"Nombre: {pais["nombre"]}")
@@ -34,6 +36,9 @@ def listar_paises(paises):
         print(f"Continente: {pais["continente"]}\n")
     
 def buscar_pais(paises):
+    # funcion que solicita al usuario un texto para buscar paises.
+    # la busqueda es parcial y no distingue mayuscula/minusculas.
+    # muetra todos los resultados que coincidan o un mensaje si no encuentra ninguno.
     texto = input("\nIngrese el nombre del pais a buscar: \n").strip().lower()
     encontrados = []
 
