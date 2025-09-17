@@ -26,12 +26,32 @@ def mostrar_menu():
     print("6. Salir.")
 
 def listar_paises(paises):
-    print("=== Listado de Países ===")
-    for pais in paises:1
-        print(f"Nombre: {pais['nombre']}")
-        print(f"Población: {pais['poblacion']:,}")  # separador de miles con comas
-        print(f"Superficie: {pais['superficie']:,} km²")
-        print(f"Continente: {pais['continente']}\n")
+    print("\n=== Listado de Países ===\n")
+    for pais in paises:
+        print(f"Nombre: {pais["nombre"]}")
+        print(f"Población: {pais["poblacion"]:,}")  # separador de miles con comas
+        print(f"Superficie: {pais["superficie"]:,} km²")
+        print(f"Continente: {pais["continente"]}\n")
+    
+def buscar_pais(paises):
+    texto = input("\nIngrese el nombre del pais a buscar: \n").strip().lower()
+    encontrados = []
+
+
+    for pais in paises:
+        if texto in pais["nombre"].lower():
+            encontrados.append(pais)
+
+    if encontrados:
+        print(f"\nSe encontraron {len(encontrados)} paises que coinciden: \n")
+        for pais in encontrados:
+            print(f"Nombre: {pais["nombre"]}")
+            print(f"Población: {pais["poblacion"]:,}")  # separador de miles con comas
+            print(f"Superficie: {pais["superficie"]:,} km²")
+            print(f"Continente: {pais["continente"]}\n")
+    
+    else:
+        print("No se encontro ningun pais que coincida con la busqueda.")
 
 
 paises = cargar_paises(rutacsv)
@@ -44,5 +64,20 @@ while True:
         listar_paises(paises)
 
     elif opcion == "2":
-        print()
+        buscar_pais(paises)
 
+    elif opcion == "3":
+        print("Opción 3: Filtrar países (pendiente de implementar)")
+
+    elif opcion == "4":
+        print("Opción 4: Ordenar países (pendiente de implementar)")
+
+    elif opcion == "5":
+        print("Opción 5: Mostrar estadísticas (pendiente de implementar)")
+
+    elif opcion == "6":
+        print("Saliendo...")
+        break
+
+    else:
+        print("Opción no válida. Intente nuevamente.")
