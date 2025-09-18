@@ -58,6 +58,60 @@ def buscar_pais(paises):
     else:
         print("No se encontro ningun pais que coincida con la busqueda.")
 
+def filtrar_paises(paises):
+    print("\n=== Filtrar Países ===")
+    print("1. Por continente")
+    print("2. Por rango de población")
+    print("3. Por rango de superficie")
+    opcion = input("Seleccione una opción de filtrado: ")
+
+    resultados = []
+
+    #filtro por continente
+    if opcion == "1":
+        continente = input("Ingrese el continente: ").strip().lower()
+        for pais in paises:
+            continente_pais = pais["continente"].lower()
+            if continente in continente_pais:
+                resultados.append(pais)
+
+    #filtro por poblacion
+    elif opcion == "2":
+        try:
+            minimo = int(input("Ingrese la poblacion minima: "))
+            maximo = int(input("Ingrese la poblacion maxima: "))
+            for pais in paises:
+                poblacion = pais["poblacion"]
+                if poblacion >= minimo and poblacion <= maximo:
+                    resultados.append(pais)
+        except ValueError:
+            print("Solo valores numericos.")
+    #filtro por superficie
+    elif opcion == "3":
+        try:
+            minimo = int(input("Ingrese la superficie minima: "))
+            maximo  = int(input("Ingrese la superficie maxima: "))
+            for pais in paises:
+                superficie = pais["superficie"]
+                if superficie >= minimo and superficie <= maximo:
+                    resultados.append(pais)
+        except ValueError:
+            print("Solo valores numericos.")
+
+    else:
+        print("Opcion invalida.")
+    #muestro los resultados
+    if len(resultados) > 0:
+        print(f"\nSe encontraron {len(resultados)} países:\n")
+        for pais in resultados:
+            print(f"Nombre: {pais['nombre']}")
+            print(f"Población: {pais['poblacion']:,}")
+            print(f"Superficie: {pais['superficie']:,} km²")
+            print(f"Continente: {pais['continente']}\n")
+    else:
+        print("\nNo se encontraron países con esos criterios.")
+
+
 
 paises = cargar_paises(rutacsv)
 
@@ -72,7 +126,7 @@ while True:
         buscar_pais(paises)
 
     elif opcion == "3":
-        print("Opción 3: Filtrar países (pendiente de implementar)")
+        filtrar_paises(paises)
 
     elif opcion == "4":
         print("Opción 4: Ordenar países (pendiente de implementar)")
