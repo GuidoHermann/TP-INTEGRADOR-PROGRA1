@@ -4,4 +4,4 @@ Repositorio del trabajo practico integrador de Programacion 1 UTN VIRTUAL
 
 # Comisión:
 
-Comision n° 6
+Comisión n° 6
