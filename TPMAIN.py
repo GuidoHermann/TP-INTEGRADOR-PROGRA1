@@ -109,6 +109,7 @@ def agregar_pais(paises):
         "continente": continente
     }
     paises.append(pais)
+    guardar_paises(rutacsv, paises)
     print(f"País '{nombre}' agregado correctamente.")
 
     return paises
