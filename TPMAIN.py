@@ -95,7 +95,7 @@ def agregar_pais(paises):
 
     # Validar que el continente no este vacío y no haya sensibilidades por mayúscula o espacios.
     while True:
-        continente = input("Continente: ").strip().lower()
+        continente = input("Continente: ").strip().title()
         if continente == "":
             print("Error: el continente no puede estar vacío.")
         else:
@@ -426,9 +426,9 @@ def mostrar_menu():
 
         match opcion:
             case "1":
-                agregar_pais(paises)
+               paises = agregar_pais(paises)
             case "2":
-                actualizar_pais(paises, rutacsv)
+               paises = actualizar_pais(paises, rutacsv)
             case "3":
                 buscar_pais(paises)
             case "4":
