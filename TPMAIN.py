@@ -34,7 +34,7 @@ def agregar_pais(paises):
 
     # Solicitar nombre y validar duplicado
     while True:
-        nombre = input("Nombre: ").strip().lower()
+        nombre = input("Ingrese el nombre del país que desea agregar: ").strip().lower()
         if nombre == "":
             print("Error: el nombre no puede estar vacío.")
             continue
