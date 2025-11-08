@@ -95,7 +95,7 @@ def agregar_pais(paises):
 
     # Validar que el continente no este vacío y no haya sensibilidades por mayúscula o espacios.
     while True:
-        continente = input("Continente: ").strip().lower()
+        continente = input("Continente: ").strip().title()
         if continente == "":
             print("Error: el continente no puede estar vacío.")
         else:
