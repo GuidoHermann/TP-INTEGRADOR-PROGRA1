@@ -425,9 +425,9 @@ def mostrar_menu():
 
         match opcion:
             case "1":
-                agregar_pais(paises)
+               paises = agregar_pais(paises)
             case "2":
-                actualizar_pais(paises, rutacsv)
+               paises = actualizar_pais(paises, rutacsv)
             case "3":
                 buscar_pais(paises)
             case "4":
