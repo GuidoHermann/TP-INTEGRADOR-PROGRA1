@@ -53,52 +53,66 @@ def guardar_paises(rutacsv, paises):
 def agregar_pais(paises):
     print("\n--- Agregar nuevo país ---")
 
-    # Solicitar nombre y validar que no este vacío ni duplicado
+    # Solicitar nombre y validar que no esté vacío, no tenga números ni duplicados
     while True:
-        nombre = input("Nombre: ").strip().lower()
+        nombre = input("Nombre: ").strip()
         if nombre == "":
             print("Error: el nombre no puede estar vacío.")
             continue
+        elif not nombre.replace(" ", "").isalpha():  # solo letras y espacios
+            print("Error: el nombre no puede contener números ni símbolos.")
+            continue
 
+        nombre_formateado = nombre.title()
+
+        # Validar duplicado sin importar mayúsculas/minúsculas
         existe = False
         for pais in paises:
-            if pais["nombre"].lower() == nombre:
+            if pais["nombre"].lower() == nombre_formateado.lower():
                 existe = True
                 break
 
         if existe:
-            print(f"El país '{nombre}' ya existe en la base de datos. Ingrese otro nombre.")
+            print(f"El país '{nombre_formateado}' ya existe en la base de datos. Ingrese otro nombre.")
         else:
+            nombre = nombre_formateado
             break
 
-    # Validar población: debe ser un número entero
+    # Validar población: debe ser un número entero positivo
     while True:
         poblacion = input("Población (en número entero): ").strip()
         if poblacion == "":
             print("Error: este campo no puede estar vacío.")
         elif not poblacion.isdigit():
-            print("Valor inválido. Ingrese un número entero para la población.")
+            print("Valor inválido. Ingrese un número entero positivo.")
+        elif int(poblacion) <= 0:
+            print("La población debe ser mayor que cero.")
         else:
             poblacion = int(poblacion)
             break
 
-    # Validar superficie: debe ser un número entero
+    # Validar superficie: debe ser un número entero positivo
     while True:
         superficie = input("Superficie en km²: ").strip()
         if superficie == "":
             print("Error: este campo no puede estar vacío.")
         elif not superficie.isdigit():
-            print("Valor inválido. Ingrese un número entero para la superficie.")
+            print("Valor inválido. Ingrese un número entero positivo.")
+        elif int(superficie) <= 0:
+            print("La superficie debe ser mayor que cero.")
         else:
             superficie = int(superficie)
             break
 
-    # Validar que el continente no este vacío y no haya sensibilidades por mayúscula o espacios.
+    # Validar continente: solo letras, sin símbolos ni números
     while True:
-        continente = input("Continente: ").strip().title()
+        continente = input("Continente: ").strip()
         if continente == "":
             print("Error: el continente no puede estar vacío.")
+        elif not continente.replace(" ", "").isalpha():
+            print("Error: el continente no puede contener números ni símbolos.")
         else:
+            continente = continente.title()
             break
 
     # Agregar el país a la lista
@@ -113,6 +127,8 @@ def agregar_pais(paises):
     print(f"País '{nombre}' agregado correctamente.")
 
     return paises
+
+
 
 # ======================================
 # Opción 2) Actualizar los datos de Población y Superfice de un País. 
