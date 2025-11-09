@@ -131,53 +131,73 @@ def agregar_pais(paises):
 
 
 # ======================================
-# Opción 2) Actualizar los datos de Población y Superfice de un País. 
+# Opción 2) Actualizar los datos de Población y Superficie de un País. 
 # ======================================
 def actualizar_pais(paises, rutacsv):
     print("\n--- Actualizar país ---")
-    nombre = input("Ingrese el nombre del país a actualizar: ").strip().lower()
+
+    # Mostrar lista de países disponibles
+    print("\nPaíses disponibles:")
+    for p in paises:
+        print(f"- {p['nombre']}")
+    print("--------------------------------")
+
+    # Pedir el país a actualizar
+    nombre = input("\nIngrese el nombre exacto del país a actualizar: ").strip().title()
     encontrado = False
 
-    # Recorre los países y valida que exista
     for pais in paises:
-        if pais["nombre"].lower() == nombre:
+        if pais["nombre"].lower() == nombre.lower():
             encontrado = True
-            print(f"País encontrado: {pais['nombre']}")
-            nueva_pob = input("Nueva población (dejar vacío para mantener actual): ").strip()
-            nueva_sup = input("Nueva superficie (dejar vacío para mantener actual): ").strip()
+            print(f"\nPaís encontrado: {pais['nombre']}")
+            print(f"Población actual: {pais['poblacion']:,}")
+            print(f"Superficie actual: {pais['superficie']:,} km²\n")
 
             actualizado = False
 
-            # Validar que no este vacío y actualizar población
-            if nueva_pob != "":
-                if nueva_pob.isdigit():
+            # Validar nueva población (opcional)
+            while True:
+                nueva_pob = input("Nueva población (dejar vacío para mantener actual): ").strip()
+                if nueva_pob == "":
+                    break  # no se modifica
+                elif not nueva_pob.isdigit():
+                    print("Error: la población debe ser un número entero positivo.")
+                elif int(nueva_pob) <= 0:
+                    print("Error: la población debe ser mayor que cero.")
+                else:
                     pais["poblacion"] = int(nueva_pob)
                     actualizado = True
-                else:
-                    print("Valor inválido. No se modificó la población.")
+                    break
 
-            # Validar que no este vacío, sea un número y actualizar superficie
-            if nueva_sup != "":
-                if nueva_sup.isdigit():
+            # Validar nueva superficie (opcional)
+            while True:
+                nueva_sup = input("Nueva superficie (dejar vacío para mantener actual): ").strip()
+                if nueva_sup == "":
+                    break  # no se modifica
+                elif not nueva_sup.isdigit():
+                    print("Error: la superficie debe ser un número entero positivo.")
+                elif int(nueva_sup) <= 0:
+                    print("Error: la superficie debe ser mayor que cero.")
+                else:
                     pais["superficie"] = int(nueva_sup)
                     actualizado = True
-                else:
-                    print("Valor inválido. No se modificó la superficie.")
+                    break
 
-            # Guardar los cambios si hubo actualizaciones válidas
+            # Guardar los cambios si hubo alguna modificación
             if actualizado:
                 guardar_paises(rutacsv, paises)
-                print("\nDatos actualizados correctamente y guardados en el archivo.")
-                mostrar_pais(pais)
-
+                print("\n✅ Datos actualizados correctamente y guardados en el archivo.")
+                print(f"País actualizado: {pais['nombre']} — Población: {pais['poblacion']:,}, Superficie: {pais['superficie']:,} km²")
             else:
-                print("No se realizaron cambios válidos.")
+                print("\nNo se realizaron cambios.")
             break
 
     if not encontrado:
-        print("No se encontró el país indicado.")
+        print("\nNo se encontró el país indicado. Revise el nombre e intente nuevamente.")
 
     return paises
+
+
 
 # ======================================
 # Opción 3 Buscar países
