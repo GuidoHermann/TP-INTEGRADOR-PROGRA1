@@ -203,7 +203,7 @@ def actualizar_pais(paises, rutacsv):
 # Opción 3 Buscar países
 # ======================================
 def buscar_pais(paises):
-    texto = input("\nIngrese el nombre del pais a buscar: \n").strip().lower()
+    texto = input("\nIngrese el nombre del país a buscar: \n").strip().lower()
     encontrados = []
 
     # Recorre los países y si el nombre existe lo agrega a la lista de 'encontrados'
@@ -213,11 +213,11 @@ def buscar_pais(paises):
 
     # Verifica que la lista tenga al menos un elemento y lo muestra, sino le muestra un mensaje al usuario informandole que no se han encontrado
     if len(encontrados) > 0:
-        print(f"\nSe encontraron {len(encontrados)} paises que coinciden: \n")
+        print(f"\nSe encontraron: {len(encontrados)} paises que coinciden: \n")
         for pais in encontrados:
            mostrar_pais(pais)
     else:
-        print("No se encontro ningun pais que coincida con la busqueda.")
+        print("No se encontro ningún país que coincida con la búsqueda.")
 
 # ======================================
 # Opción 4) Filtrar países
