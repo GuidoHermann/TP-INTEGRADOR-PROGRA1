@@ -1,4 +1,4 @@
-# TP-INTEGRADOR-PROGRA1
+# TP-INTEGRADOR-PROGRAMACIÓN 1
 
 Repositorio del trabajo practico integrador de Programacion 1 UTN VIRTUAL
 
