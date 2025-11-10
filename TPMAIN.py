@@ -22,7 +22,7 @@ def cargar_paises (rutacsv):
 # =============================== 
 # Funciones auxiliares para ordenar
 def obtener_nombre(pais):
-    return pais["nombre"]
+    return pais["nombre"].lower()
 
 def obtener_poblacion(pais):
     return pais["poblacion"]
@@ -352,12 +352,12 @@ def filtrar_paises(paises):
         print("\nNo se encontraron países con esos criterios.")
 
 # ======================================
-# Opción 5) Ordenar países por: Nombre | Población | Superficie (ascendente o descendente)  
+# Opción 5) Ordenar países por: Nombre | Población | Superficie (ascendente o descendente)
 # ======================================
 def ordenar_paises(paises):
     print("\n--- Ordenar países ---")
 
-    # Validar opción numérica (1, 2 o 3)
+    # Elegir criterio
     while True:
         print("1) Por nombre")
         print("2) Por población")
@@ -368,7 +368,7 @@ def ordenar_paises(paises):
         else:
             break
 
-    # Validar tipo de orden (A o D)
+    # Elegir tipo de orden
     while True:
         orden = input("Ascendente (A) o Descendente (D): ").strip().lower()
         if orden not in ("a", "d"):
@@ -381,16 +381,20 @@ def ordenar_paises(paises):
     # Ordenar según la opción elegida
     if opcion == "1":
         paises_ordenados = sorted(paises, key=obtener_nombre, reverse=invertido)
+        criterio = "nombre"
     elif opcion == "2":
         paises_ordenados = sorted(paises, key=obtener_poblacion, reverse=invertido)
+        criterio = "población"
     elif opcion == "3":
         paises_ordenados = sorted(paises, key=obtener_superficie, reverse=invertido)
+        criterio = "superficie"
 
     # Mostrar resultados
-    print("\nListado ordenado:")
+    print(f"\n--- Listado ordenado por {criterio} ({'descendente' if invertido else 'ascendente'}) ---\n")
     for p in paises_ordenados:
-        mostrar_pais(p)
+        print(f"{p['nombre']:20} | {p['poblacion']:>12,} hab | {p['superficie']:>10,} km² | {p['continente']}")
 
+        
 # ======================================
 # Opción 6) Mostrar estadísticas: País con mayor y menor población | Promedio de población | Promedio de superficie | Cantidad de países por continente 
 # ======================================
