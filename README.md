@@ -8,7 +8,7 @@ Comisión n° 6
 
 ## Integrantes:
 
-Alzogaray, Guido Hermann -
+Hermann Alzogaray, Guido. -
 Godoy, Sabrina Anabella
 
 ### Participación de los integrantes:
